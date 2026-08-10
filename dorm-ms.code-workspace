@@ -1,0 +1,10 @@
+{
+  "folders": [
+    { "name": "backend", "path": "backend" },
+    { "name": "frontend", "path": "frontend" }
+  ],
+  "settings": {
+    "files.encoding": "utf8",
+    "files.eol": "\n"
+  }
+}

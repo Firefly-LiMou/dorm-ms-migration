@@ -1,0 +1,5 @@
+# 本地配置示例：复制本文件为 application-local.yml 并填写真实密码（application-local.yml 已被 gitignore，禁止提交）
+spring:
+  datasource:
+    username: root
+    password: 你的本地数据库密码

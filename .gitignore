@@ -1,0 +1,16 @@
+# ---- 系统与编辑器 ----
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+*.swp
+
+# ---- 日志 ----
+*.log
+
+# ---- 环境变量（敏感配置一律不提交） ----
+.env
+.env.local
+.env.*.local
+
+# 各工程自身的忽略规则见 backend/.gitignore 与 frontend/.gitignore

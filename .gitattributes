@@ -1,0 +1,12 @@
+# 强制 LF 换行，避免 Windows CRLF 造成 git diff 混乱
+* text=auto eol=lf
+
+# Windows 批处理脚本保持 CRLF，防止 cmd 执行异常
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jar binary
+*.zip binary

@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "redhat.java",
+    "vmware.vscode-boot-dev-pack",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-lombok",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}

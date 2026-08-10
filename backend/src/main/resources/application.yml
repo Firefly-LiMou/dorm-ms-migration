@@ -1,0 +1,36 @@
+# 公共配置模板（提交到仓库）。本地数据库密码必须在 application-local.yml 中覆盖，禁止写入本文件后提交。
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: dorm-ms-backend
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dorm_manage?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: ""
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Sa-Token：Token 有效期 1 天（86400 秒），前端通过请求头 satoken 传递，禁用 Cookie 模式
+sa-token:
+  token-name: satoken
+  timeout: 86400
+  is-read-cookie: false
+  is-write-header: true
+  token-style: uuid
+
+# Knife4j 接口文档：启动后访问 /api/doc.html
+knife4j:
+  enable: true

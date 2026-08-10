@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "启动后端 (DormApplication)",
+      "request": "launch",
+      "mainClass": "com.dorm.DormApplication",
+      "projectName": "dorm-ms-backend",
+      "cwd": "${workspaceFolder}/backend"
+    }
+  ]
+}

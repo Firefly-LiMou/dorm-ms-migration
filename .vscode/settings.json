@@ -1,0 +1,8 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "editor.formatOnSave": false,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.onBuildFailureProceed": true,
+  "maven.executable.path": ""
+}
