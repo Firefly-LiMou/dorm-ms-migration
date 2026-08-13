@@ -175,6 +175,20 @@ public class CheckinServiceImpl implements CheckinService {
         return vo;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteCheckin(Long checkinId) {
+        DormCheckinDO checkin = checkinMapper.selectById(checkinId);
+        if (checkin == null) {
+            throw new BusinessException(5001, "数据不存在");
+        }
+        if (checkin.getStatus() != 2) {
+            throw new BusinessException(4004, "入住记录未退宿，禁止删除");
+        }
+        checkinMapper.deleteById(checkinId);
+        log.info("删除入住记录成功 checkinId={}", checkinId);
+    }
+
     private PageVO<CheckinVO> emptyPage() {
         PageVO<CheckinVO> vo = new PageVO<>();
         vo.setTotal(0L);

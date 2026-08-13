@@ -8,6 +8,7 @@ import com.dorm.entity.dto.BedStatusDTO;
 import com.dorm.entity.query.BedPageQuery;
 import com.dorm.service.BedService;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,14 @@ public class BedController {
     @PutMapping("/{bedId}/status")
     public Result<Void> updateStatus(@PathVariable Long bedId, @Valid @RequestBody BedStatusDTO dto) {
         bedService.updateStatus(bedId, dto);
+        return Result.success();
+    }
+
+    /** 删除床位（仅空闲床位可删除） */
+    @OperationLog(module = "床位管理", type = "删除", desc = "删除床位")
+    @DeleteMapping("/{bedId}")
+    public Result<Void> deleteBed(@PathVariable Long bedId) {
+        bedService.deleteBed(bedId);
         return Result.success();
     }
 }

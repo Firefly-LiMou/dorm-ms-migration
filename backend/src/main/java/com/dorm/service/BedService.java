@@ -19,4 +19,7 @@ public interface BedService {
 
     /** 手动更新床位状态（仅数据纠错） */
     void updateStatus(Long bedId, BedStatusDTO dto);
+
+    /** 删除床位（仅空闲床位可删除） */
+    void deleteBed(Long bedId);
 }

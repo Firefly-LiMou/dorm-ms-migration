@@ -8,6 +8,7 @@ import com.dorm.entity.dto.CheckoutDTO;
 import com.dorm.entity.query.CheckinPageQuery;
 import com.dorm.service.CheckinService;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,5 +62,14 @@ public class CheckinController {
     public Result<?> myCheckins(@RequestParam(defaultValue = "1") Integer pageNum,
                                 @RequestParam(defaultValue = "10") Integer pageSize) {
         return Result.success(checkinService.pageMyCheckins(pageNum, pageSize));
+    }
+
+    /** 删除入住记录（仅已退宿记录可删除） */
+    @SaCheckRole("admin")
+    @OperationLog(module = "入住管理", type = "删除", desc = "删除入住记录")
+    @DeleteMapping("/{checkinId}")
+    public Result<Void> deleteCheckin(@PathVariable Long checkinId) {
+        checkinService.deleteCheckin(checkinId);
+        return Result.success();
     }
 }

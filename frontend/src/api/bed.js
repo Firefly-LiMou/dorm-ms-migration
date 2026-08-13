@@ -8,3 +8,6 @@ export const batchCreateBedsApi = (data) => request.post('/bed/batch', data)
 
 /** 手动更新床位状态 */
 export const updateBedStatusApi = (id, data) => request.put(`/bed/${id}/status`, data)
+
+/** 删除床位（仅空闲） */
+export const deleteBedApi = (id) => request.delete(`/bed/${id}`)

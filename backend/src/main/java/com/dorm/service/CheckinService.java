@@ -22,4 +22,7 @@ public interface CheckinService {
 
     /** 学生查询本人入住记录 */
     PageVO<CheckinVO> pageMyCheckins(Integer pageNum, Integer pageSize);
+
+    /** 删除入住记录（仅已退宿记录可删除） */
+    void deleteCheckin(Long checkinId);
 }

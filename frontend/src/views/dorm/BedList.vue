@@ -38,9 +38,10 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="140" fixed="right">
+        <el-table-column label="操作" width="220" fixed="right">
           <template #default="{ row }">
             <el-button size="small" @click="handleToggleStatus(row)">改为{{ row.status === 1 ? '空闲' : '已入住' }}</el-button>
+            <el-button v-if="row.status === 0" size="small" type="danger" @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
         <template #empty>
@@ -85,8 +86,8 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
-import { pageBedsApi, batchCreateBedsApi, updateBedStatusApi } from '@/api/bed'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { pageBedsApi, batchCreateBedsApi, updateBedStatusApi, deleteBedApi } from '@/api/bed'
 import { listBuildingsApi } from '@/api/building'
 import { listRoomsApi } from '@/api/room'
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants'
@@ -161,6 +162,13 @@ const handleToggleStatus = async (row) => {
   const target = row.status === 1 ? 0 : 1
   await updateBedStatusApi(row.bedId, { status: target })
   ElMessage.success('状态更新成功')
+  loadData()
+}
+
+const handleDelete = async (row) => {
+  await ElMessageBox.confirm(`确定删除「${row.bedNo}号床」吗？`, '提示', { type: 'warning' })
+  await deleteBedApi(row.bedId)
+  ElMessage.success('删除成功')
   loadData()
 }
 

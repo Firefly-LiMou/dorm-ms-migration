@@ -64,4 +64,17 @@ public class BedServiceImpl implements BedService {
         update.setStatus(dto.getStatus());
         bedMapper.updateById(update);
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteBed(Long bedId) {
+        DormBedDO bed = bedMapper.selectById(bedId);
+        if (bed == null) {
+            throw new BusinessException(5001, "数据不存在");
+        }
+        if (bed.getStatus() != 0) {
+            throw new BusinessException(3005, "床位已入住，禁止删除");
+        }
+        bedMapper.deleteById(bedId);
+    }
 }

@@ -42,9 +42,10 @@
           </template>
         </el-table-column>
         <el-table-column prop="operatorName" label="办理人" width="100" />
-        <el-table-column label="操作" width="110" fixed="right">
+        <el-table-column label="操作" width="180" fixed="right">
           <template #default="{ row }">
             <el-button v-if="row.status === 1" size="small" type="danger" @click="handleCheckout(row)">退宿</el-button>
+            <el-button v-if="row.status === 2" size="small" type="danger" plain @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
         <template #empty>
@@ -100,7 +101,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { pageCheckinsApi, checkinApi, checkoutApi, pageStudentsApi } from '@/api/checkin'
+import { pageCheckinsApi, checkinApi, checkoutApi, pageStudentsApi, deleteCheckinApi } from '@/api/checkin'
 import { listBuildingsApi } from '@/api/building'
 import { listRoomsApi } from '@/api/room'
 import { pageBedsApi } from '@/api/bed'
@@ -210,6 +211,13 @@ const handleCheckout = async (row) => {
   await ElMessageBox.confirm(`确定为「${row.realName}」办理退宿吗？`, '提示', { type: 'warning' })
   await checkoutApi(row.checkinId, {})
   ElMessage.success('退宿成功')
+  loadData()
+}
+
+const handleDelete = async (row) => {
+  await ElMessageBox.confirm(`确定删除「${row.realName}」的退宿记录吗？`, '提示', { type: 'warning' })
+  await deleteCheckinApi(row.checkinId)
+  ElMessage.success('删除成功')
   loadData()
 }
 

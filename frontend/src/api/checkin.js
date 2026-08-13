@@ -14,3 +14,6 @@ export const pageCheckinsApi = (params) => request.get('/checkin/page', { params
 
 /** 学生查询本人入住记录 */
 export const myCheckinsApi = (params) => request.get('/checkin/my', { params })
+
+/** 删除入住记录（仅已退宿） */
+export const deleteCheckinApi = (id) => request.delete(`/checkin/${id}`)
