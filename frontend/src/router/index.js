@@ -22,6 +22,18 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/Dashboard.vue'),
         meta: { title: '首页', roles: ['student', 'admin'] }
+      },
+      {
+        path: 'user',
+        name: 'UserManage',
+        component: () => import('@/views/user/UserManage.vue'),
+        meta: { title: '学生账号管理', roles: ['admin'] }
+      },
+      {
+        path: 'log',
+        name: 'OperationLog',
+        component: () => import('@/views/log/OperationLog.vue'),
+        meta: { title: '操作日志', roles: ['admin'] }
       }
     ]
   },

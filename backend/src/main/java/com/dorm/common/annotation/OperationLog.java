@@ -1,5 +1,7 @@
 package com.dorm.common.annotation;
 
+import com.dorm.common.enums.OperationType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,7 +18,7 @@ public @interface OperationLog {
     String module();
 
     /** 操作类型：新增 / 修改 / 删除 */
-    String type();
+    OperationType type();
 
     /** 操作描述（如 删除楼栋） */
     String desc() default "";
