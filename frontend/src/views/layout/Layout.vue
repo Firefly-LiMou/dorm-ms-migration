@@ -8,7 +8,7 @@
           :key="item.path"
           :index="item.path"
         >
-          <span>{{ item.meta?.title || item.path }}</span>
+          <span>{{ item.title }}</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
@@ -48,11 +48,17 @@ const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
 
-// 菜单由路由表生成：按当前角色过滤 meta.roles，业务路由追加后菜单自动出现
+// 菜单由路由表生成：按当前角色过滤 meta.roles；index 使用完整路径（以 / 开头），
+// 否则 el-menu 的 router 模式会把相对路径解析成基于当前页面的嵌套路径导致 404
 const menuItems = computed(() => {
   const layoutRoute = router.options.routes.find((r) => r.path === '/')
   const children = layoutRoute?.children || []
-  return children.filter((item) => !item.meta?.hidden && item.meta?.roles?.includes(userStore.role))
+  return children
+    .filter((item) => !item.meta?.hidden && item.meta?.roles?.includes(userStore.role))
+    .map((item) => ({
+      path: item.path.startsWith('/') ? item.path : `/${item.path}`,
+      title: item.meta?.title || item.path
+    }))
 })
 
 const activeMenu = computed(() => route.path)
