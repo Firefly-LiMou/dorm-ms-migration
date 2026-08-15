@@ -96,6 +96,17 @@ class UserManagementFlowIntegrationTest {
     void createStudent_success_then_duplicate_fail() throws Exception {
         long userId = createStudent(TEST_STUDENT_NO_1);
 
+        // 创建成功：分页查询能查到该账号，且 userId 与返回值一致
+        mockMvc.perform(get("/user/page")
+                        .header("satoken", adminToken)
+                        .param("pageNum", "1")
+                        .param("pageSize", "10")
+                        .param("username", TEST_STUDENT_NO_1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.data.list[0].userId").value(userId))
+                .andExpect(jsonPath("$.data.list[0].username").value(TEST_STUDENT_NO_1));
+
         // 学号唯一校验：重复创建返回 1003
         mockMvc.perform(post("/user")
                         .header("satoken", adminToken)
