@@ -36,6 +36,36 @@ const routes = [
         name: 'OperationLog',
         component: () => import('@/views/log/OperationLog.vue'),
         meta: { title: '操作日志', roles: ['admin'] }
+      },
+      {
+        path: 'dorm/building',
+        name: 'BuildingList',
+        component: () => import('@/views/dorm/BuildingList.vue'),
+        meta: { title: '楼栋管理', roles: ['admin'] }
+      },
+      {
+        path: 'dorm/room',
+        name: 'RoomList',
+        component: () => import('@/views/dorm/RoomList.vue'),
+        meta: { title: '房间管理', roles: ['admin'] }
+      },
+      {
+        path: 'dorm/bed',
+        name: 'BedList',
+        component: () => import('@/views/dorm/BedList.vue'),
+        meta: { title: '床位管理', roles: ['admin'] }
+      },
+      {
+        path: 'dorm/checkin',
+        name: 'CheckinList',
+        component: () => import('@/views/dorm/CheckinList.vue'),
+        meta: { title: '入住管理', roles: ['admin'] }
+      },
+      {
+        path: 'dorm/my-checkin',
+        name: 'MyCheckin',
+        component: () => import('@/views/dorm/MyCheckin.vue'),
+        meta: { title: '我的住宿', roles: ['student'] }
       }
     ]
   },

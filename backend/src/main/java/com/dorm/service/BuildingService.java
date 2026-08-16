@@ -1,18 +1,29 @@
 package com.dorm.service;
 
-import com.dorm.entity.vo.BuildingVO;
+import com.dorm.common.page.PageVO;
+import com.dorm.entity.dto.BuildingDTO;
+import com.dorm.entity.po.DormBuildingDO;
+import com.dorm.entity.query.BuildingPageQuery;
 
 import java.util.List;
 
 /**
- * 楼栋服务
+ * 楼栋服务接口
  */
 public interface BuildingService {
 
-    /**
-     * 查询楼栋下拉列表（供房间管理、入住分配、报修筛选下拉选择）
-     *
-     * @return 全部楼栋（不分页）
-     */
-    List<BuildingVO> listAll();
+    /** 分页查询楼栋 */
+    PageVO<DormBuildingDO> pageBuildings(BuildingPageQuery query);
+
+    /** 查询全部楼栋下拉列表 */
+    List<DormBuildingDO> listAll();
+
+    /** 新增楼栋 */
+    void addBuilding(BuildingDTO dto);
+
+    /** 编辑楼栋 */
+    void updateBuilding(Long buildingId, BuildingDTO dto);
+
+    /** 删除楼栋（校验下级房间） */
+    void deleteBuilding(Long buildingId);
 }
