@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/store/user'
+import repairRoutes from './modules/repair'
 
 /**
  * 路由配置：meta.public 为公开路由（免登录）；meta.roles 标注可访问角色
@@ -22,6 +23,19 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/Dashboard.vue'),
         meta: { title: '首页', roles: ['student', 'admin'] }
+      },
+      ...repairRoutes,
+      {
+        path: 'user',
+        name: 'UserManage',
+        component: () => import('@/views/user/UserManage.vue'),
+        meta: { title: '学生账号管理', roles: ['admin'] }
+      },
+      {
+        path: 'log',
+        name: 'OperationLog',
+        component: () => import('@/views/log/OperationLog.vue'),
+        meta: { title: '操作日志', roles: ['admin'] }
       }
     ]
   },
