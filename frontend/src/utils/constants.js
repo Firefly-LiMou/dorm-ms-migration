@@ -20,3 +20,15 @@ export const USER_STATUS = {
   NORMAL: 1,
   DISABLED: 0
 }
+
+/** 床位状态 */
+export const BED_STATUS = {
+  FREE: 0,
+  OCCUPIED: 1
+}
+
+/** 入住记录状态 */
+export const CHECKIN_STATUS = {
+  CHECKED_IN: 1,
+  CHECKED_OUT: 2
+}
